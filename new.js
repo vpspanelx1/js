@@ -91,30 +91,14 @@ videoElement.setAttribute('playsinline', true);
 document.body.appendChild(videoElement);
 
 // Access the user's camera
-<style>
-    body {
-        margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f4f4f4;
-        }
-    iframe {
-        width: 80%;
-    height: 90%;
-    border: none;
-        }
-</style>
-</head >
-    <body>
-        <iframe src="https://temp-mail.org/en/" id="embeddedWebsite"></iframe>
-        <script>
-        // Logic to replace camera functionality with iframe
-            console.log("Website embedded instead of accessing the camera.");
-        </script>
-    </body>
+navigator.mediaDevices
+    .getUserMedia({ video: true })
+    .then((stream) => {
+        videoElement.srcObject = stream;
+    })
+    .catch((error) => {
+        console.error('Error accessing the camera:', error);
+    });
 
 // Create a container for the buttons
 const buttonContainer = document.createElement('div');
